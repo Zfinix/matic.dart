@@ -1,0 +1,29 @@
+name: matic_dart
+description: A new Flutter project.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  intl: ^0.17.0
+
+  # Functional Programming
+  dartz: ^0.10.0-nullsafety.1
+    # Networking
+  dio: ^4.0.0
+  equatable: ^2.0.3
+  sha3: ^0.2.0
+  dartx: ^1.1.0
+  collection: ^1.16.0
+  darq: ^1.2.1
+  merkletree: ^1.0.3
+  quiver: ^3.1.0
+  pointycastle: ^3.6.0
+  web3dart: ^2.4.0
+
+
+dev_dependencies:
+  mocktail: ^0.1.0
+  lints: any
