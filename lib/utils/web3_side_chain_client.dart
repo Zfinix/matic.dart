@@ -1,31 +1,40 @@
-import { IBaseClientConfig } from "../interfaces";
-import { BaseWeb3Client } from "../abstracts";
-import { ABIManager } from ".";
-import { Logger } from "./logger";
-import { utils } from "..";
 
-export class Web3SideChainClient<T_CONFIG> {
-    parent: BaseWeb3Client;
-    child: BaseWeb3Client;
 
-    config: T_CONFIG;
+import 'package:matic_dart/abstracts/base_web3_client.dart';
+import 'package:matic_dart/interfaces/base_client_config.dart';
+import 'package:matic_dart/utils/abi_manager.dart';
+import 'package:matic_dart/utils/index.dart';
+import 'package:matic_dart/utils/logger.dart';
 
-    abiManager: ABIManager;
+class Web3SideChainClient{
+    final BaseWeb3Client parent;
+    final BaseWeb3Client child;
 
-    logger = new Logger();
-    resolution: {};
 
-    init(config: IBaseClientConfig) {
-        config = config || {} as any;
-        config.parent.defaultConfig = config.parent.defaultConfig || {} as any;
-        config.child.defaultConfig = config.child.defaultConfig || {} as any;
-        this.config = config as any;
+   final ABIManager abiManager;
+
+  final  logger =  Logger();
+   final Map resolution ;
+     T_CONFIG config;
+
+  Web3SideChainClient({
+    required this.parent,
+    required this.child,
+    required this.config,
+    required this.abiManager,
+     this.resolution= const{},
+  });
+
+    init(IBaseClientConfig _config) {
+        config?.parent.defaultConfig = _config.parent?.defaultConfig;
+        config.child.defaultConfig = config.child.defaultConfig;
+        this.config = _config;
 
         // tslint:disable-next-line
-        const Web3Client = utils.Web3Client;
+        const Web3Client =Utils.Web3Client;
 
         if (!Web3Client) {
-            throw new Error("Web3Client is not set");
+            throw 'Web3Client is not set';
         }
 
         if (utils.UnstoppableDomains) {

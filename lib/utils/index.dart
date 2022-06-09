@@ -1,3 +1,7 @@
+import 'package:matic_dart/abstracts/base_web3_client.dart';
+import 'package:matic_dart/utils/converter.dart';
+import 'package:matic_dart/utils/logger.dart';
+
 export "abi_manager.dart";
 export "base_token.dart";
 export "bridge_client.dart";
@@ -14,9 +18,9 @@ export "set_proof_api_url.dart'.dart";
 export "use.dart";
 export "web3_side_chain_client.dart";
 
-class Utils  {
-  final Converter converter,
-  Web3Client: BaseWeb3Client,
-  BN: EmptyBigNumber,
-  UnstoppableDomains: Object
+class Utils {
+  static final converter = Converter();
+  static final logger = Logger();
+  static final web3Client = BaseWeb3Client();
+  static final unstoppableDomains = Object();
 }

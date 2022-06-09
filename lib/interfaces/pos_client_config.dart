@@ -11,7 +11,7 @@ class IPOSClientConfig extends IBaseClientConfig {
   final String? rootChain;
   final IPOSERC1155Address? erc1155;
 
-  const IPOSClientConfig({
+  IPOSClientConfig({
     required this.rootChainManager,
     required this.rootChain,
     required this.erc1155,
@@ -21,12 +21,5 @@ class IPOSClientConfig extends IBaseClientConfig {
     IBaseClient? child,
     bool? log,
     num? requestConcurrency,
-  }) : super(
-          network: network,
-          version: version,
-          parent: parent,
-          child: child,
-          log: log,
-          requestConcurrency: requestConcurrency,
-        );
+  });
 }

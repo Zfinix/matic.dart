@@ -1,13 +1,8 @@
+import 'dart:convert';
 
-
- import 'package:web3dart/crypto.dart';
+import 'package:web3dart/crypto.dart';
 
 class Converter {
-    static stringToHex(String input) {
-     
-     return bytesToHex(input)
-    }
-    static bigIntToHex(amount: BaseBigNumber ) {
-     
-    }
+  static String stringToHex(String input) => bytesToHex(utf8.encode(input));
+  static String bigIntToHex(BigInt input) => bytesToHex(intToBytes(input));
 }

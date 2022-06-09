@@ -43,7 +43,8 @@ class NetworkService {
     final url = createUrl(network,
         '/fast-merkle-proof?start=${start}&end=${end}&number=${blockNumber}');
     return httpRequest.get(url).then((result) {
-      return result.data['proof'];
+      final res = result.fold((l) => {}, (r) => r.data);
+      return res.data['proof'];
     });
   }
 }
