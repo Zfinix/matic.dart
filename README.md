@@ -14,10 +14,6 @@ This library will help developers to move assets from Ethereum chain to Matic ch
 
 https://maticnetwork.github.io/matic.js
 
-## Support
-
-Our [Discord](https://discord.gg/s2NPJNUvyc) is the best way to reach us ✨.
-
 ## Contributors
 
 You are very welcome to contribute, please see contributing guidelines - [[Contribute](CONTRIBUTING.MD)].
