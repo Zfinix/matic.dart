@@ -1,10 +1,7 @@
 # Matic SDK
 
-[![GitHub version](https://badge.fury.io/gh/maticnetwork%2Fmatic.js.svg)](https://badge.fury.io/gh/maticnetwork%2Fmatic.js)
-![Build Status](https://github.com/maticnetwork/matic.js/workflows/CI/badge.svg?branch=master)
-[![npm version](https://badge.fury.io/js/%40maticnetwork%2Fmaticjs.svg)](https://badge.fury.io/js/%40maticnetwork%2Fmaticjs)
-![GitHub](https://img.shields.io/github/license/maticnetwork/matic.js)
-[![TEST](https://github.com/maticnetwork/matic.js/actions/workflows/test.yml/badge.svg)](https://github.com/maticnetwork/matic.js/actions/workflows/test.yml)
+[![GitHub version](https://badge.fury.io/gh/zfinix%2Fmatic.dart.svg)](https://badge.fury.io/gh/zfinix%2Fmatic.dart)
+![GitHub](https://img.shields.io/github/license/zfinix/matic.dart)
 
 This repository contains the `matic_dart` client library. `matic_dart` makes it easy for developers, who may not be deeply familiar with smart contract development, to interact with the various components of Matic Network.
 
