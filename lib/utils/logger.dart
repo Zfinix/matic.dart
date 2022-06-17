@@ -13,9 +13,14 @@ class Logger {
   }
 
   ErrorHelper error(ERROR_TYPE type, [String? info]) {
-    return ErrorHelper(
-      type: type,
-      info: info,
-    );
+    final err = ErrorHelper(type: type, info: info);
+    print('$type: ${err.message}');
+    return err;
+  }
+}
+
+extension ThrowErrorHelper on ErrorHelper {
+  void throwException() {
+    throw this;
   }
 }

@@ -4,6 +4,8 @@ enum ERROR_TYPE<T extends Object> {
   allowedOnChild<String>("allowed_on_child"),
 
   unknown<String>("unknown"),
+  
+  invalidTransaction<String>("invalid_transaction"),
 
   proofAPINotSet<String>("proof_api_not_set"),
 

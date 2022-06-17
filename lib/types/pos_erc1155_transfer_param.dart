@@ -1,10 +1,6 @@
-
-
-import 'package:matic_dart/types/index.dart';
-
 class POSERC1155TransferParam {
-  final TYPE_AMOUNT tokenId;
-  final TYPE_AMOUNT amount;
+  final BigInt tokenId;
+  final BigInt amount;
   final String userAddress;
   final String? data;
 

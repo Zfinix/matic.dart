@@ -7,7 +7,7 @@ abstract class IApproveTransactionOption extends ITransactionOption {
   ///
   final String spenderAddress;
 
-  const IApproveTransactionOption({
+   IApproveTransactionOption({
     required this.spenderAddress,
   });
 }

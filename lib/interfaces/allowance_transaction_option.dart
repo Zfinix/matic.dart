@@ -8,7 +8,7 @@ abstract class IAllowanceTransactionOption extends ITransactionOption {
   ///
   final String spenderAddress;
 
-  const IAllowanceTransactionOption({
+   IAllowanceTransactionOption({
     required this.spenderAddress,
   });
 }

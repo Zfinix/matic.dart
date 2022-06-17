@@ -1,6 +1,6 @@
-import 'package:matic_dart/interfaces/tx_receipt.dart';
+import 'package:web3dart/web3dart.dart';
 
 abstract class ITransactionWriteResult {
-  Future<String> getTransactionHash();
-  Future<ITransactionReceipt> getReceipt();
+  String get transactionHash;
+  Future<TransactionReceipt?> getReceipt();
 }

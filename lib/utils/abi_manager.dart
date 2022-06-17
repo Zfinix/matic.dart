@@ -36,13 +36,13 @@ class ABIManager {
     };
   }
 
-  Object getConfig(String path) {
-    return resolve(cache[networkName]![version]!['address'], path);
+  T? getConfig<T>(String path) {
+    return resolve<T>(cache[networkName]![version]!['address'], path);
   }
 
   Future<dynamic> getABI({
     required String contractName,
-    String bridgeType = 'plasma',
+    String? bridgeType,
   }) async {
     final targetBridgeABICache = cache[this.networkName]![this.version]!['abi']
         [bridgeType] as Map<String, dynamic>?;
@@ -53,17 +53,17 @@ class ABIManager {
         return Future.value(abiForContract);
       }
     }
-    
+
     final result = await service.abi?.getABI(
       network: networkName,
       version: version,
-      bridgeType: bridgeType,
+      bridgeType: bridgeType ?? 'plasma',
       contractName: contractName,
     );
 
     setABI(
       contractName: contractName,
-      bridgeType: bridgeType,
+      bridgeType: bridgeType ?? 'plasma',
       abi: result ?? {},
     );
     return result;

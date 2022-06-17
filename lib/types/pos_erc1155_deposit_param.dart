@@ -1,8 +1,6 @@
-import 'package:matic_dart/types/index.dart';
-
 class POSERC1155DepositParam {
-  final TYPE_AMOUNT tokenId;
-  final TYPE_AMOUNT amount;
+  final BigInt tokenId;
+  final BigInt amount;
   final String userAddress;
   final String? data;
 
@@ -15,8 +13,8 @@ class POSERC1155DepositParam {
 }
 
 class POSERC1155DepositBatchParam {
-  final List<TYPE_AMOUNT> tokenIds;
-  final List<TYPE_AMOUNT> amounts;
+  final List<BigInt> tokenIds;
+  final List<BigInt> amounts;
   final String userAddress;
   final String? data;
 

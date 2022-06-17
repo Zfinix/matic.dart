@@ -1,4 +1,5 @@
 import 'package:dartx/dartx.dart';
+import 'package:matic_dart/interfaces/index.dart';
 import 'package:matic_dart/utils/http_request.dart';
 
 class NetworkService {
@@ -13,7 +14,7 @@ class NetworkService {
 
   Future<dynamic> getBlockIncluded({
     required String network,
-    required num blockNumber,
+    required BigInt blockNumber,
   }) async {
     /* 
     {
@@ -34,14 +35,12 @@ class NetworkService {
     });
   }
 
-  Future getProof({
-    required String network,
-    required start,
-    required end,
-    required blockNumber,
-  }) async {
-    final url = createUrl(network,
-        '/fast-merkle-proof?start=${start}&end=${end}&number=${blockNumber}');
+  Future getProof(
+      {required String network, required IRootBlockInfo root}) async {
+    final url = createUrl(
+      network,
+      '/fast-merkle-proof?start=${root.start}&end=${root.end}&number=${root.blockNumber}',
+    );
     return httpRequest.get(url).then((result) {
       final res = result.fold((l) => {}, (r) => r.data);
       return res.data['proof'];

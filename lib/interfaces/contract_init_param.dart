@@ -1,5 +1,7 @@
-abstract class IContractInitParam {
-  final String address;
+import 'package:web3dart/web3dart.dart';
+
+class IContractInitParam {
+  final EthereumAddress address;
   final String? bridgeType;
   final bool isParent;
 

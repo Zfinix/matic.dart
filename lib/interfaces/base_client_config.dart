@@ -1,23 +1,25 @@
+import 'dart:convert';
+
 class IBaseClientConfig {
-  final List<String>? network;
-  final List<String>? version;
-  final bool? log;
+  final String network;
+  final String version;
+  final bool log;
   final num? requestConcurrency;
   IBaseClient? parent;
   IBaseClient? child;
 
   IBaseClientConfig({
-    this.network,
-    this.version,
+   required  this.network,
+   required this.version,
     this.parent,
     this.child,
-    this.log,
+    this.log = false,
     this.requestConcurrency,
   });
 
   IBaseClientConfig copyWith({
-    List<String>? network,
-    List<String>? version,
+    String? network,
+    String? version,
     IBaseClient? parent,
     IBaseClient? child,
     bool? log,
@@ -36,7 +38,7 @@ class IBaseClientConfig {
 
 class IBaseClient {
   dynamic provider;
-  IBaseClient defaultConfig;
+  IBaseClientDefaultConfig defaultConfig;
   IBaseClient({
     required this.provider,
     required this.defaultConfig,
@@ -44,7 +46,7 @@ class IBaseClient {
 
   IBaseClient copyWith({
     dynamic provider,
-    IBaseClient? defaultConfig,
+    IBaseClientDefaultConfig? defaultConfig,
   }) {
     return IBaseClient(
       provider: provider ?? this.provider,
@@ -57,4 +59,20 @@ class IBaseClientDefaultConfig {
   final List<String> from;
 
   const IBaseClientDefaultConfig({this.from = const []});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'from': from,
+    };
+  }
+
+  factory IBaseClientDefaultConfig.fromMap(Map<String, dynamic> map) {
+    return IBaseClientDefaultConfig(
+      from: List<String>.from(map['from']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory IBaseClientDefaultConfig.fromJson(String source) => IBaseClientDefaultConfig.fromMap(json.decode(source));
 }

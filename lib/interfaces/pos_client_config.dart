@@ -15,11 +15,11 @@ class IPOSClientConfig extends IBaseClientConfig {
     required this.rootChainManager,
     required this.rootChain,
     required this.erc1155,
-    List<String>? network,
-    List<String>? version,
+    required String network,
+    required String version,
     IBaseClient? parent,
     IBaseClient? child,
     bool? log,
     num? requestConcurrency,
-  });
+  }) : super(network: network, version: version);
 }
