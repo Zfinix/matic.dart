@@ -1,79 +1,83 @@
-
- import 'package:matic_dart/interfaces/contract_init_param.dart';
-import 'package:matic_dart/interfaces/pos_client_config.dart';
-import 'package:matic_dart/interfaces/pos_contracts.dart';
-import 'package:matic_dart/utils/base_token.dart';
-import 'package:matic_dart/utils/web3_side_chain_client.dart';
+import 'package:dartz/dartz.dart';
+import 'package:matic_dart/index.dart';
+import 'package:matic_dart/pos/exit_util.dart';
+import 'package:matic_dart/pos/root_chain_manager.dart';
 
 class POSToken extends BaseToken<IPOSClientConfig> {
+  String predicateAddress = '';
+  final IContractInitParam contractParam;
+  final Web3SideChainClient<IPOSClientConfig> client;
+  final IPOSContracts getPOSContracts;
 
-    final  String predicateAddress;
-    final IContractInitParam contractParam;
-    final Web3SideChainClient<IPOSClientConfig> client;
-    final IPOSContracts getPOSContracts;
+  POSToken({
+    required this.contractParam,
+    required this.client,
+    required this.getPOSContracts,
+  }) : super(
+          contractParam: contractParam,
+          client: client,
+        );
 
-    POSToken( {
-        required this.predicateAddress,
-        required this.contractParam,
-     required   this.client ,
-     required   this.getPOSContracts ,
-    }):super(contractParam: contractParam, client: client,);
+  RootChainManager get rootChainManager {
+    return this.getPOSContracts.rootChainManager;
+  }
 
-     get rootChainManager {
-        return this.getPOSContracts.rootChainManager;
+  ExitUtil get exitUtil {
+    return this.getPOSContracts.exitUtil;
+  }
+
+  Future<String> getPredicateAddress() async {
+    if (predicateAddress.isNotEmpty) {
+      return Future.value(this.predicateAddress);
     }
 
-     get exitUtil {
-        return this.getPOSContracts.exitUtil;
+    final method = await this.rootChainManager.method(
+      "tokenToType",
+      [contractParam.address],
+    );
+
+    final tokenType = await method?.read();
+
+    if (!tokenType) {
+      throw 'Invalid Token Type';
     }
 
+    final meth = await this.rootChainManager.method(
+          "typeToPredicate",
+          tokenType,
+        );
 
-   Future<String>  getPredicateAddress() async{
-        if (predicateAddress.isNotEmpty) {
-            return Future.value(this.predicateAddress);
-        }
-        return this.rootChainManager.method(
-            "tokenToType",
-            this.contractParam.address
-        ).then(method => {
-            return method.read();
-        }).then(tokenType => {
-            if (!tokenType) {
-                throw new Error('Invalid Token Type');
-            }
-            return this.rootChainManager.method(
-                "typeToPredicate", tokenType
-            );
-        }).then(typeToPredicateMethod => {
-            return typeToPredicateMethod.read<string>();
-        }).then(predicateAddress => {
-            this.predicateAddress = predicateAddress;
-            return predicateAddress;
-        });
-    }
+    final pred = await meth?.read<String>();
+    predicateAddress = pred ?? '';
+    return pred ?? '';
+  }
 
-    protected isWithdrawn(txHash: string, eventSignature: string) {
-        if (!txHash) {
-            throw new Error(`txHash not provided`);
-        }
-        return this.exitUtil.getExitHash(
-            txHash, eventSignature
-        ).then(exitHash => {
-            return this.rootChainManager.isExitProcessed(
-                exitHash
-            );
-        });
+  isWithdrawn(String txHash, String eventSignature) async {
+    if (txHash.isEmpty) {
+      throw 'txHash not provided';
     }
+    
+    final exitHash = await this.exitUtil.getExitHash(
+          txHash,
+          eventSignature,
+        );
 
-    protected withdrawExitPOS(burnTxHash: string, eventSignature: string, isFast: boolean, option: ITransactionOption) {
-        return this.exitUtil.buildPayloadForExit(
-            burnTxHash,
-            eventSignature,
-            isFast
-        ).then(payload => {
-            return this.rootChainManager.exit(
-                payload, option
-            );
-        });
-    }
+    return rootChainManager.isExitProcessed(exitHash);
+  }
+
+  Future<Either<ITransactionWriteResult, ITransactionRequestConfig>?>
+      withdrawExitPOS(
+    String burnTxHash,
+    String eventSignature,
+    bool isFast,
+    ITransactionOption option,
+  ) async {
+    final payload = await exitUtil.buildPayloadForExit(
+      burnTxHash,
+      eventSignature,
+      isFast,
+    );
+
+    return rootChainManager.exit(payload, option);
+  }
 }

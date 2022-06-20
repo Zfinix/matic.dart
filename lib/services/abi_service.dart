@@ -13,7 +13,7 @@ class ABIService {
     required String contractName,
   }) async {
     final url =
-        '${network}/${version}/artifacts/${bridgeType}/${contractName}.json';
+        '$network/$version/artifacts/$bridgeType/$contractName.json';
 
     final result = await httpRequest.get(url);
     return result.fold((l) => {}, (r) => r.data['abi']);
@@ -23,7 +23,7 @@ class ABIService {
     required String network,
     required String version,
   }) async {
-    final url = '${network}/${version}/index.json';
+    final url = '$network/$version/index.json';
 
     final result = await httpRequest.get(url);
     return result.fold((l) => null, (r) => r.data);

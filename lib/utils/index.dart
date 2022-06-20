@@ -1,7 +1,4 @@
-import 'package:matic_dart/abstracts/base_web3_client.dart';
-import 'package:matic_dart/matic_dart/web3/web3_client.dart';
-import 'package:matic_dart/utils/converter.dart';
-import 'package:matic_dart/utils/logger.dart';
+import 'package:matic_dart/index.dart';
 
 export "abi_manager.dart";
 export "base_token.dart";

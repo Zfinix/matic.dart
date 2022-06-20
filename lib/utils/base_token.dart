@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:matic_dart/index.dart';
-import 'package:matic_dart/matic_dart/web3/index.dart';
-import 'package:matic_dart/utils/error_helper.dart';
+import 'package:equatable/equatable.dart';
 import 'package:web3dart/web3dart.dart';
+import 'package:matic_dart/index.dart';
 
 class ITransactionConfigParam {
   final ITransactionRequestConfig txConfig;
@@ -18,7 +17,7 @@ class ITransactionConfigParam {
   });
 }
 
-class BaseToken<T> {
+class BaseToken<T> with EquatableMixin {
   BaseContract? contract_;
   final IContractInitParam contractParam;
   final Web3SideChainClient<T> client;
@@ -280,4 +279,7 @@ class BaseToken<T> {
             );
         }); */
   }
+
+  @override
+  List<Object> get props => [contract_ ?? '', contractParam, client];
 }

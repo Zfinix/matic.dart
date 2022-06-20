@@ -3,8 +3,6 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:matic_dart/index.dart';
-import 'package:matic_dart/matic_dart/helpers/transaction_write_result.dart';
-import 'package:matic_dart/matic_dart/web3/index.dart';
 import 'package:web3dart/crypto.dart';
 import 'package:web3dart/json_rpc.dart';
 import 'package:web3dart/web3dart.dart';

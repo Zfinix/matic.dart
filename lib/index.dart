@@ -6,6 +6,7 @@ export "interfaces/index.dart";
 export "types/index.dart";
 export "abstracts/index.dart";
 export "services/index.dart";
+export "matic_dart/index.dart";
 
 
 

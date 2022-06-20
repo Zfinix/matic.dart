@@ -14,3 +14,4 @@ export "error.dart";
 export "root_block_info.dart";
 export "allowance_transaction_option.dart";
 export "approve_transaction_option.dart";
+export "pos_contracts.dart";

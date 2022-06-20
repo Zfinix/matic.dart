@@ -1,13 +1,15 @@
 import 'package:matic_dart/interfaces/transaction_option.dart';
 
-abstract class IApproveTransactionOption extends ITransactionOption {
+class IApproveTransactionOption extends ITransactionOption {
   /// address of spender
   ///
   /// **spender** - third-party user or a smart contract which can transfer your token on your behalf.
   ///
   final String spenderAddress;
 
-   IApproveTransactionOption({
+  const IApproveTransactionOption({
     required this.spenderAddress,
   });
+
+  static const empty = IApproveTransactionOption(spenderAddress: '');
 }

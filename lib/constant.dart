@@ -1,1 +1,1 @@
-const MAX_AMOUNT = 0xffffffffffffffff;
+final MAX_AMOUNT = BigInt.from(0xffffffffffffffff);

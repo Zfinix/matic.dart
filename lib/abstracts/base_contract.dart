@@ -10,3 +10,4 @@ abstract class BaseContract {
 
   BaseContractMethod method(String methodName, List args);
 }
+ABIService

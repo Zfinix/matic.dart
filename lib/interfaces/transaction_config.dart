@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:web3dart/web3dart.dart';
 
-class ITransactionRequestConfig extends Transaction {
+class ITransactionRequestConfig{
   final BigInt? gasLimit;
   final BigInt? chainId;
   final String? chain;
@@ -50,7 +50,7 @@ class ITransactionRequestConfig extends Transaction {
   final EtherAmount? maxPriorityFeePerGas;
   final EtherAmount? maxFeePerGas;
 
-  ITransactionRequestConfig({
+  const ITransactionRequestConfig({
     this.gasLimit,
     this.chainId,
     this.chain,
@@ -67,7 +67,6 @@ class ITransactionRequestConfig extends Transaction {
     this.maxPriorityFeePerGas,
   });
 
-  @override
   ITransactionRequestConfig copyWith({
     BigInt? gasLimit,
     BigInt? chainId,

@@ -37,35 +37,35 @@ class RootChain extends BaseToken<IPOSClientConfig> {
         ;
 
         // binary search on all the checkpoints to find the checkpoint that contains the childBlockNumber
-        var ans;
+        BigInt ans = bigOne;
         while (start<= end) {
             if (start ==end) {
                 ans = start;
                 break;
             }
-            final mid = ( start + end)/bigtwo;
+            final mid =  BigInt.from(( start + end)/bigtwo);
             final headerBlocksMethod = await this.method(
                 "headerBlocks",
-              [ ( mid * checkPointInterval.toDouble()).toString()]
+              [ ( mid * checkPointInterval).toString()]
             );
             final headerBlock = await headerBlocksMethod?.read();
 
-            const headerStart = new utils.BN(headerBlock.start);
-            const headerEnd = new utils.BN(headerBlock.end);
+            final headerStart = headerBlock.start;
+            final headerEnd = headerBlock.end;
 
-            if (headerStart.lte(childBlockNumber) && childBlockNumber.lte(headerEnd)) {
+         /*    if (headerStart <=childBlockNumber && childBlockNumber<=headerEnd) {
                 // if childBlockNumber is between the upper and lower bounds of the headerBlock, we found our answer
                 ans = mid;
                 break;
             } else if (headerStart.gt(childBlockNumber)) {
                 // childBlockNumber was checkpointed before this header
-                end = mid.sub(bigOne);
+                end = mid -bigOne;
             } else if (headerEnd.lt(childBlockNumber)) {
                 // childBlockNumber was checkpointed after this header
-                start = mid.add(bigOne);
-            }
+                start = mid +bigOne;
+            } */
         }
-        return ans.mul(checkPointInterval);
+        return ans*checkPointInterval;
     }
 
 }

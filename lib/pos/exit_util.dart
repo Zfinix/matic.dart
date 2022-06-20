@@ -1,6 +1,5 @@
 
 import 'package:matic_dart/index.dart';
-import 'package:matic_dart/matic_dart/web3/index.dart';
 import 'package:matic_dart/pos/root_chain.dart';
 import 'package:matic_dart/utils/error_helper.dart';
 import 'package:web3dart/web3dart.dart';
@@ -168,7 +167,7 @@ class IChainBlockInfo {
         if (isFast && service.network != null) {
              ErrorHelper(type:ERROR_TYPE.proofAPINotSet).throwException();
         }
-
+/* 
          BigInt? txBlockNumber ;
          IRootBlockInfo?   rootBlockInfo;
          TransactionReceipt?   receipt;
@@ -233,10 +232,10 @@ class IChainBlockInfo {
                 receiptProof.path,
                 logIndex
             );
-        });
+        }); */
     }
 
-    private encodePayload_(
+     encodePayload_(
         headerNumber,
         buildBlockProof,
         blockNumber,
@@ -248,7 +247,7 @@ class IChainBlockInfo {
         path,
         logIndex
     ) {
-        return bufferToHex(
+       /*  return bufferToHex(
             rlp.encode([
                 headerNumber,
                 buildBlockProof,
@@ -261,11 +260,11 @@ class IChainBlockInfo {
                 bufferToHex(Buffer.concat([Buffer.from('00', 'hex'), path])),
                 logIndex,
             ])
-        );
+        ); */
     }
 
     getExitHash(burnTxHash, logEventSig) {
-        let lastChildBlock: string,
+        /* let lastChildBlock: string,
             receipt: ITransactionReceipt,
             block: IBlockWithTransaction;
 
@@ -300,6 +299,6 @@ class IChainBlockInfo {
             return this.maticClient_.etheriumSha3(
                 receipt.blockNumber, bufferToHex(Buffer.concat(nibbleArr)), logIndex
             );
-        });
+        }); */
     }
 }
