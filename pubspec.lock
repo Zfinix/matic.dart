@@ -120,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  dart_numerics:
+    dependency: "direct main"
+    description:
+      name: dart_numerics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.6"
   dartx:
     dependency: "direct main"
     description:
@@ -470,6 +477,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:

@@ -10,15 +10,17 @@ import 'package:web3dart/web3dart.dart';
 class MaticWeb3Client extends Web3Client {
   final String url;
   final Credentials cred;
-  final Logger logger;
   final Client? client;
+  final Logger? kLogger;
 
   late RpcService _jsonRpc;
 
+  Logger get logger => kLogger ?? Logger();
+
   MaticWeb3Client({
     required this.url,
-    required this.logger,
     required this.cred,
+    this.kLogger,
     this.client,
   }) : super(url, client ?? Client()) {
     _jsonRpc = JsonRPC(url, client ?? Client());
@@ -161,5 +163,15 @@ class MaticWeb3Client extends Web3Client {
 
       rethrow;
     }
+  }
+
+  Future<String> getRootHash({
+    required dynamic startBlock,
+    required dynamic endBlock,
+  }) {
+    return makeRPCCall<String>(
+      'eth_getRootHash',
+      [startBlock, endBlock],
+    );
   }
 }
